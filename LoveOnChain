@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Skipper</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+	<div class="header">
+	<h1>Skipper NFTs</h1>
+	<p style="margin-top: 10px">An Emerging Collection of Digital Art and Merchandise</p>
+</div>
+
+	<div class="navbar">
+					<a href="index.html">Home</a>
+					<a href="index.html">Collections</a>
+					<a href="about.html">About</a>
+					
+
+				</div>
+	
+<div><h2 style="padding:20px">LOVE ON CHAIN</h2></div>
+<article>
+	
+<canvas id='canvas1'></canvas>
+</article>
+
+<p>Limited edition of 100 hearts<br>Send 15 ada to this address: [insert]<br>Or pay using the button below</p>
+
+<section>
+		<div class='button'><img src="https://pro.nft-maker.io/images/buttons/paybutton_1_1.svg" onclick="javascript:openPaymentWindow()"></div>
+</section>
+	
+<script type="text/javascript">
+            function openPaymentWindow() {
+                const paymentUrl = "https://payment.nft-maker.io/?p=d2e48fc2edc344ed914021ceef9f8376&c=1";
+
+                // Specify the popup width and height
+                const popupWidth = 500;
+                const popupHeight = 700;
+
+                // Calculate the center of the screen
+                const left = window.top.outerWidth / 2 + window.top.screenX - ( popupWidth / 2);
+                const top = window.top.outerHeight / 2 + window.top.screenY - ( popupHeight / 2);
+
+                const popup =  window.open(paymentUrl, "NFT-MAKER PRO Payment Gateway",  `popup=1, location=1, width=${popupWidth}, height=${popupHeight}, left=${left}, top=${top}`);
+
+                // Continuously check whether the popup has been closed
+                const backgroundCheck = setInterval(function () {
+                    if(popup.closed) {
+                        clearInterval(backgroundCheck);
+
+                        console.log("Popup closed");
+
+                    }
+                }, 1000);
+            }
+</script>
+
+
+<script>
+
+//Get Random Colour function
+function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+              }
+              return color;
+            };
+
+//Random Integer function
+function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+          };
+//Set up canvas 
+
+	const canvas = document.getElementById('canvas1');
+	const ctx = canvas.getContext('2d');
+	canvas.width = 550;
+	canvas.height = 550;
+	canvas.style.width = '50vw';
+  canvas.style.height = '50vh';
+  canvas.style.transform = "rotate(270deg)";         // or -90 depending on need
+  canvas.style.webkitTransform = "rotate(270deg)";
+  ctx.fillStyle='black';
+  ctx.fillRect(0, 0, canvas.width, canvas.height/2);
+  document.body.style.backgroundColor = 'black';
+
+  console.log(canvas.height)
+
+//Create Symbols and apply Effect
+
+	class Symbol {
+		constructor(x, y, fontSize, canvasHeight){
+			this.characters = '01';
+			this.x = x;
+			this.y = y;
+			this.fontSize = fontSize;
+			this.text = '';
+			this.canvasHeight = canvasHeight;
+
+		}
+		draw(context){
+			this.text = this.characters.charAt(Math.floor(Math.random()*this.characters.length));
+			context.fillText(this.text, this.x * this.fontSize, this.y * this.fontSize);
+			if (this.y * this.fontSize > this.canvasHeight && Math.random() > 0.1){
+				this.y = 0;
+			} else {
+				this.y += 1;
+			}
+
+		}
+	}
+
+	class Effect {
+		constructor(canvasWidth, canvasHeight){
+			this.canvasWidth = canvasWidth;
+			this.canvasHeight = canvasHeight;
+			this.fontSize = 1;
+			this.columns = this.canvasWidth/this.fontSize;
+			this.symbols = [];
+			this.#initialize();
+
+		}
+		#initialize(){
+			for (let i = 0; i < this.columns; i++){
+				this.symbols[i] = new Symbol(i, 0, this.fontSize, this.canvasHeight); 
+			}
+		}
+		resize(width, height){
+			this.canvasWidth = width;
+			this.canvasHeight = height;
+			this.columns = this.canvasWidth/this.fontSize;
+			this.symbols = [];
+			this.#initialize();
+
+		}
+	}
+
+const effect = new Effect(canvas.width, canvas.height);
+let lastTime = 0;
+const fps = 60;
+const nextFrame = 2500/fps;
+let timer = 0;
+
+
+var colour_array = new Array (
+	'darkRed',
+	'red',
+	'mediumVioletRed'
+	)
+
+//Animate Binary
+
+function animate(timeStamp){
+	const deltaTime = timeStamp - lastTime;
+	lastTime = timeStamp;
+
+
+	if (timer > nextFrame){
+	ctx.fillStyle = 'rgba(0, 0, 0, 0.005)';
+	ctx.textAlign = 'center';
+	ctx.fillRect(0, 0, canvas.width/2, canvas.height/2);
+	ctx.fillStyle = colour_array[getRandomInt(0,2)];
+	ctx.font = effect.fontSize + 'px monospace';
+	effect.symbols.forEach(symbol => symbol.draw(ctx));
+	effect.symbols.forEach(symbol => symbol.draw(ctx));
+	
+	ctx.translate(canvas.width/2, canvas.height/2);
+	ctx.rotate(Math.PI / 35);
+	ctx.rotate(Math.PI / 130);
+	ctx.translate(-canvas.width/2, -canvas.height/2);
+
+	timer = 0;	
+	} else {
+		timer += deltaTime;
+	}
+	requestAnimationFrame(animate);
+}
+
+animate(0);
+
+
+//Event Listener for Resize
+window.addEventListener('resize', function(){
+			canvas.width = 550;
+			canvas.height = 550;
+			effect.resize(canvas.width, canvas.height);
+})
+
+//Event Listener for Resize
+window.addEventListener('resize', function(){
+			canvas.width = 550;
+			canvas.height = 550;
+			effect.resize(canvas.width, canvas.height);
+})
+
+//Event Listener for Click
+      canvas.addEventListener(
+        "click",
+        function (event) {
+
+          if (!event.target.matches('.canvas1')) {
+
+        location.reload();
+          }
+
+        },
+        false
+      );
+
+
+</script>
+	
+</body>
+	
+</html>
+	
