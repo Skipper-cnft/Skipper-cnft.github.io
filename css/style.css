@@ -1,0 +1,55 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+	body {
+	background-color: black;
+	font-family: Helvetica;
+	font-size: 20px;
+	color: grey;
+	text-align: center;
+
+}
+
+canvas {
+	text-align: center;
+	position: relative;
+	object-fit: contain;
+	z-index: -1;
+}
+
+	.header {
+		background-color: darkBlue;
+		padding: 20px;
+	}
+
+	h1 {
+		color: limegreen;
+		text-align: center;
+	}
+
+	.button {
+		text-align: center;
+		padding: 30px;
+	}
+
+	.navbar {
+		background: linear-gradient(0, red 0, blue, darkBlue 100%);
+		padding: 20px;
+
+	}
+
+
+a {
+	background-color: transparent;
+	text-decoration: none;
+	color:  white;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.footer {
+	padding: 20px;
+}
