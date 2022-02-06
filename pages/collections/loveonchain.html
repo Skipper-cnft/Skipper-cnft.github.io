@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Skipper</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/css/style.css">
+  <title>Skipper</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="file:///Users/oscar/CNFTs/CNFT%20Art/Skipper/Website/css/style.css">
 </head>
 
 <body>
 
-	<div class="header">
-	<h1>Skipper NFTs</h1>
-	<p style="margin-top: 10px">An Emerging Collection of Digital Art and Merchandise</p>
+  <div class="header">
+  <h1>Skipper NFTs</h1>
+  <p style="margin-top: 10px">An Emerging Collection of Digital Art and Merchandise</p>
 </div>
 
-	<div class="navbar">
-					<a href="/index.html">Home</a>
-					<button class="dropbtn">Collections</button>
-  					<div class="dropdown-content">
-						  <a href="/pages/collections/loveonchain.html">LoveOnChain</a>
-						</div>
-					<a href="pages/about.html">About</a>
-					</div>
-	
-<div><h2 style="padding:20px">LOVE ON CHAIN</h2></div>
+  <div class="navbar">
+          <a href="file:///Users/oscar/CNFTs/CNFT%20Art/Skipper/Website/index.html">Home</a>
+          
+          <div class="dropdown">
+          <button class="dropbtn">Collections</button>
+            <div class="dropdown-content">
+              <a href="file:///Users/oscar/CNFTs/CNFT%20Art/Skipper/Website/pages/collections/loveonchain.html">LoveOnChain</a>
+            </div></div>
+          <a href="pages/about.html">Merchandise</a>
+          <a href="pages/about.html">About</a>
+          </div>
+  
+<div class="title"><h2>LOVE ON CHAIN</h2></div>
 <article>
-	
+  
 <canvas id='canvas1'></canvas>
 </article>
 
-<p>Limited edition of 100 hearts<br>Send 15 ada to this address: [insert]<br>Or pay using the button below</p>
+<p>Policy id:<br> af5a467248334486d761e5e71651fc55bcf9e70e0c01ff6a153b5393</p><br>
+
+<p>Limited edition of 100 hearts</p><br><p>To buy send 15 ada to this address: [insert]<br>Or pay using the button below</p>
 
 <section>
-		<div class='button'><img src="https://pro.nft-maker.io/images/buttons/paybutton_1_1.svg" onclick="javascript:openPaymentWindow()"></div>
+    <div class='button'><img src="https://pro.nft-maker.io/images/buttons/paybutton_1_1.svg" onclick="javascript:openPaymentWindow()"></div>
 </section>
-	
+  
 <script type="text/javascript">
             function openPaymentWindow() {
                 const paymentUrl = "https://payment.nft-maker.io/?p=d2e48fc2edc344ed914021ceef9f8376&c=1";
@@ -80,11 +85,11 @@ function getRandomInt(min, max) {
           };
 //Set up canvas 
 
-	const canvas = document.getElementById('canvas1');
-	const ctx = canvas.getContext('2d');
-	canvas.width = 550;
-	canvas.height = 550;
-	canvas.style.width = '50vw';
+  const canvas = document.getElementById('canvas1');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 550;
+  canvas.height = 550;
+  canvas.style.width = '50vw';
   canvas.style.height = '50vh';
   canvas.style.transform = "rotate(270deg)";         // or -90 depending on need
   canvas.style.webkitTransform = "rotate(270deg)";
@@ -96,52 +101,52 @@ function getRandomInt(min, max) {
 
 //Create Symbols and apply Effect
 
-	class Symbol {
-		constructor(x, y, fontSize, canvasHeight){
-			this.characters = '01';
-			this.x = x;
-			this.y = y;
-			this.fontSize = fontSize;
-			this.text = '';
-			this.canvasHeight = canvasHeight;
+  class Symbol {
+    constructor(x, y, fontSize, canvasHeight){
+      this.characters = '01';
+      this.x = x;
+      this.y = y;
+      this.fontSize = fontSize;
+      this.text = '';
+      this.canvasHeight = canvasHeight;
 
-		}
-		draw(context){
-			this.text = this.characters.charAt(Math.floor(Math.random()*this.characters.length));
-			context.fillText(this.text, this.x * this.fontSize, this.y * this.fontSize);
-			if (this.y * this.fontSize > this.canvasHeight && Math.random() > 0.1){
-				this.y = 0;
-			} else {
-				this.y += 1;
-			}
+    }
+    draw(context){
+      this.text = this.characters.charAt(Math.floor(Math.random()*this.characters.length));
+      context.fillText(this.text, this.x * this.fontSize, this.y * this.fontSize);
+      if (this.y * this.fontSize > this.canvasHeight && Math.random() > 0.1){
+        this.y = 0;
+      } else {
+        this.y += 1;
+      }
 
-		}
-	}
+    }
+  }
 
-	class Effect {
-		constructor(canvasWidth, canvasHeight){
-			this.canvasWidth = canvasWidth;
-			this.canvasHeight = canvasHeight;
-			this.fontSize = 1;
-			this.columns = this.canvasWidth/this.fontSize;
-			this.symbols = [];
-			this.#initialize();
+  class Effect {
+    constructor(canvasWidth, canvasHeight){
+      this.canvasWidth = canvasWidth;
+      this.canvasHeight = canvasHeight;
+      this.fontSize = 1;
+      this.columns = this.canvasWidth/this.fontSize;
+      this.symbols = [];
+      this.#initialize();
 
-		}
-		#initialize(){
-			for (let i = 0; i < this.columns; i++){
-				this.symbols[i] = new Symbol(i, 0, this.fontSize, this.canvasHeight); 
-			}
-		}
-		resize(width, height){
-			this.canvasWidth = width;
-			this.canvasHeight = height;
-			this.columns = this.canvasWidth/this.fontSize;
-			this.symbols = [];
-			this.#initialize();
+    }
+    #initialize(){
+      for (let i = 0; i < this.columns; i++){
+        this.symbols[i] = new Symbol(i, 0, this.fontSize, this.canvasHeight); 
+      }
+    }
+    resize(width, height){
+      this.canvasWidth = width;
+      this.canvasHeight = height;
+      this.columns = this.canvasWidth/this.fontSize;
+      this.symbols = [];
+      this.#initialize();
 
-		}
-	}
+    }
+  }
 
 const effect = new Effect(canvas.width, canvas.height);
 let lastTime = 0;
@@ -151,37 +156,37 @@ let timer = 0;
 
 
 var colour_array = new Array (
-	'darkRed',
-	'red',
-	'mediumVioletRed'
-	)
+  'darkRed',
+  'red',
+  'mediumVioletRed'
+  )
 
 //Animate Binary
 
 function animate(timeStamp){
-	const deltaTime = timeStamp - lastTime;
-	lastTime = timeStamp;
+  const deltaTime = timeStamp - lastTime;
+  lastTime = timeStamp;
 
 
-	if (timer > nextFrame){
-	ctx.fillStyle = 'rgba(0, 0, 0, 0.005)';
-	ctx.textAlign = 'center';
-	ctx.fillRect(0, 0, canvas.width/2, canvas.height/2);
-	ctx.fillStyle = colour_array[getRandomInt(0,2)];
-	ctx.font = effect.fontSize + 'px monospace';
-	effect.symbols.forEach(symbol => symbol.draw(ctx));
-	effect.symbols.forEach(symbol => symbol.draw(ctx));
-	
-	ctx.translate(canvas.width/2, canvas.height/2);
-	ctx.rotate(Math.PI / 35);
-	ctx.rotate(Math.PI / 130);
-	ctx.translate(-canvas.width/2, -canvas.height/2);
+  if (timer > nextFrame){
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.005)';
+  ctx.textAlign = 'center';
+  ctx.fillRect(0, 0, canvas.width/2, canvas.height/2);
+  ctx.fillStyle = colour_array[getRandomInt(0,2)];
+  ctx.font = effect.fontSize + 'px monospace';
+  effect.symbols.forEach(symbol => symbol.draw(ctx));
+  effect.symbols.forEach(symbol => symbol.draw(ctx));
+  
+  ctx.translate(canvas.width/2, canvas.height/2);
+  ctx.rotate(Math.PI / 35);
+  ctx.rotate(Math.PI / 130);
+  ctx.translate(-canvas.width/2, -canvas.height/2);
 
-	timer = 0;	
-	} else {
-		timer += deltaTime;
-	}
-	requestAnimationFrame(animate);
+  timer = 0;  
+  } else {
+    timer += deltaTime;
+  }
+  requestAnimationFrame(animate);
 }
 
 animate(0);
@@ -189,16 +194,16 @@ animate(0);
 
 //Event Listener for Resize
 window.addEventListener('resize', function(){
-			canvas.width = 550;
-			canvas.height = 550;
-			effect.resize(canvas.width, canvas.height);
+      canvas.width = 550;
+      canvas.height = 550;
+      effect.resize(canvas.width, canvas.height);
 })
 
 //Event Listener for Resize
 window.addEventListener('resize', function(){
-			canvas.width = 550;
-			canvas.height = 550;
-			effect.resize(canvas.width, canvas.height);
+      canvas.width = 550;
+      canvas.height = 550;
+      effect.resize(canvas.width, canvas.height);
 })
 
 //Event Listener for Click
@@ -217,8 +222,8 @@ window.addEventListener('resize', function(){
 
 
 </script>
-	
+  
 </body>
-	
+  
 </html>
-	
+  
