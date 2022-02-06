@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<title>Skipper</title>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE-edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/css/style.css">
-	<title>Skipper CNFTs</title>
-<style>
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-canvas {
-	 position:  absolute;
-	 top:  0;
-	 left: 0;
-}
-
-body {
-	overflow:  hidden;
-}
-
-</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="file:///Users/oscar/CNFTs/CNFT%20Art/Skipper/Website/css/style.css">
+</head>
 
 <body>
-	<div><canvas id='canvas1' style="object-fit: contain; width: 100vw; height: 100vh"; width="550" height="550"></canvas></div>
- 
-  
-  
+
+	<div class="header">
+	<h1>Skipper NFTs</h1>
+	<p style="margin-top: 10px">An Emerging Collection of Digital Art and Merchandise</p>
+	</div>
+
+
+	 <div class="navbar">
+          <a href="file:///Users/oscar/CNFTs/CNFT%20Art/Skipper/Website/index.html">Home</a>
+          <div class="dropdown">
+          <button class="dropbtn">Collections</button>
+            <div class="dropdown-content">
+              <a href="file:///Users/oscar/CNFTs/CNFT%20Art/Skipper/Website/pages/collections/loveonchain.html">LoveOnChain</a>
+            </div></div>
+
+          <a href="pages/about.html">About</a>
+          </div>
+
+   <div class="centerElement">
+  	<p>Test test test</p>
+  	<p>Test test test</p>
+  	<p>Test test test</p>
+  	<p>Test test test</p>
+  	<p>Test test test</p>
+
+  </div>
+
+  <canvas id='canvas1'></canvas>
+
 <script>
 //Get Random Colour function
 function getRandomColor() {
@@ -46,21 +52,11 @@ function getRandomColor() {
 function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1) + min);
           };
-//Set up canvas 
 
 	const canvas = document.getElementById('canvas1');
 	const ctx = canvas.getContext('2d');
-	canvas.width = 550;
-	canvas.height = 550;
-	canvas.style.width = '100vw';
-  canvas.style.height = '100vh';
-  canvas.style.transform = "rotate(270deg)";         // or -90 depending on need
-  canvas.style.webkitTransform = "rotate(270deg)";
-  ctx.fillStyle='black';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  document.body.style.backgroundColor = 'black';
-
-//Create Symbols and apply Effect
+	canvas.width = innerWidth;
+	canvas.height = innerHeight;
 
 	class Symbol {
 		constructor(x, y, fontSize, canvasHeight){
@@ -75,7 +71,7 @@ function getRandomInt(min, max) {
 		draw(context){
 			this.text = this.characters.charAt(Math.floor(Math.random()*this.characters.length));
 			context.fillText(this.text, this.x * this.fontSize, this.y * this.fontSize);
-			if (this.y * this.fontSize > this.canvasHeight && Math.random() > 0.1){
+			if (this.y * this.fontSize > this.canvasHeight && Math.random() > 0.6){
 				this.y = 0;
 			} else {
 				this.y += 1;
@@ -88,7 +84,7 @@ function getRandomInt(min, max) {
 		constructor(canvasWidth, canvasHeight){
 			this.canvasWidth = canvasWidth;
 			this.canvasHeight = canvasHeight;
-			this.fontSize = 1;
+			this.fontSize = 15;
 			this.columns = this.canvasWidth/this.fontSize;
 			this.symbols = [];
 			this.#initialize();
@@ -96,7 +92,7 @@ function getRandomInt(min, max) {
 		}
 		#initialize(){
 			for (let i = 0; i < this.columns; i++){
-				this.symbols[i] = new Symbol(i, 0, this.fontSize, this.canvasHeight); 
+				this.symbols[i] = new Symbol(i, 550, this.fontSize, this.canvasHeight); 
 			}
 		}
 		resize(width, height){
@@ -117,12 +113,16 @@ let timer = 0;
 
 
 var colour_array = new Array (
-	'darkRed',
-	'red',
-	'mediumVioletRed'
+	'darkBlue',
+	'blue',
+	'MidnightBlue'
 	)
 
-//Animate Binary
+
+var r = getRandomInt(2,64);
+console.log(r);
+
+document.body.style.backgroundColor = 'black';
 
 function animate(timeStamp){
 	const deltaTime = timeStamp - lastTime;
@@ -130,19 +130,15 @@ function animate(timeStamp){
 
 
 	if (timer > nextFrame){
-	ctx.fillStyle = 'rgba(0, 0, 0, 0.005)';
+	ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
 	ctx.textAlign = 'center';
 	ctx.fillRect(0, 0, canvas.width/2, canvas.height/2);
 	ctx.fillStyle = colour_array[getRandomInt(0,2)];
 	ctx.font = effect.fontSize + 'px monospace';
 	effect.symbols.forEach(symbol => symbol.draw(ctx));
-	effect.symbols.forEach(symbol => symbol.draw(ctx));
-	
 	ctx.translate(canvas.width/2, canvas.height/2);
-	ctx.rotate(Math.PI / 35);
-	ctx.rotate(Math.PI / 130);
+	ctx.rotate(Math.PI / r);
 	ctx.translate(-canvas.width/2, -canvas.height/2);
-
 	timer = 0;	
 	} else {
 		timer += deltaTime;
@@ -153,10 +149,9 @@ function animate(timeStamp){
 animate(0);
 
 
-//Event Listener for Resize
 window.addEventListener('resize', function(){
-			canvas.width = 550;
-			canvas.height = 550;
+			canvas.width = innerWidth
+			canvas.height = innerHeight
 			effect.resize(canvas.width, canvas.height);
 })
 
@@ -174,6 +169,12 @@ window.addEventListener('resize', function(){
         false
       );
 
+
+
 </script>
+
+
 </body>
+	
 </html>
+	
