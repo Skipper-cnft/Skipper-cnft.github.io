@@ -31,23 +31,37 @@
 <article>
   
 <canvas id='canvas1'></canvas>
-</article>
-  
 <article style="color: grey">
 
   <p>Created for Valentine's day 2022, this work is a love letter<br> 
     to the CNFT space in general, and on chain art in particular.<br>
     It explores the nature of on chain art by using binary code, <br> 
-    which consists of zeros and ones, as particles<br> 
-  to repeatedly draw a series of shapes that concludes in a heart.<br>
+    which consists of zeros and ones, as particles to draw a series<br> 
+    of shapes that concludes in a heart. This drawing process is <br>
+    repeated until the viewer clicks the image. This intervention <br> 
+    reloads the work, clears the canvas, and restarts the drawing.<br>
+    *<br>
+    <p style="font-size: 15px;">This work is inspired by WhatLiesWithin, created by @uber_boring_man<br>
+    and @EgonFX, as well as @TheRefreshCNFT by @_ThisCr8zyLife_</p>
 </p>
 <br>
 
-<p>Policy id:<br> af5a467248334486d761e5e71651fc55bcf9e70e0c01ff6a153b5393</p><br>
 
-<p>Limited edition of 100 hearts</p><br><p>To buy send 15 ada to this address: [insert]<br>Or pay using the button below</p>
- 
-  </article>
+<p>Policy id:</p><p style="font-size: 15px;">af5a467248334486d761e5e71651fc55bcf9e70e0c01ff6a153b5393</p></p><br>
+
+<p>Limited series of 100 hearts</p><br>
+
+<p>To purchase a NFT send 15ada, or a multiple up to 5, to this address:<br> 
+
+
+<textarea readonly rows="2" cols="60">addr1vy29ck6hx5gx4sz0j00uar76e5am0p3c8q8ukzvxye05wtss8y49u</textarea>
+
+  <br>
+  <p style="font-size:15px">1 CNFT = 15ada, 3 CNFTs = 45ada, 5 CNFTs = 75ada</p>
+  <br>
+  Do not send from an exchange, the NFT will be lost and no refund will be made<br>
+Alternatively, you can pay using the button below</p>
+</article>
 
 <section>
     <div class='button'><img src="https://pro.nft-maker.io/images/buttons/paybutton_1_1.svg" onclick="javascript:openPaymentWindow()"></div>
@@ -220,11 +234,11 @@ window.addEventListener('resize', function(){
 })
 
 //Event Listener for Click
-      canvas.addEventListener(
+      LoveOnChainNFT.addEventListener(
         "click",
         function (event) {
 
-          if (!event.target.matches('.canvas1')) {
+          if (!event.target.matches('.LoveOnChainNFT')) {
 
         location.reload();
           }
