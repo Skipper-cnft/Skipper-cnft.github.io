@@ -157,10 +157,10 @@ function getRandomInt(min, max) {
       this.fontSize = 1;
       this.columns = this.canvasWidth/this.fontSize;
       this.symbols = [];
-      this.#initialize();
+      this.initialize();
 
     }
-    #initialize(){
+    initialize(){
       for (let i = 0; i < this.columns; i++){
         this.symbols[i] = new Symbol(i, 0, this.fontSize, this.canvasHeight); 
       }
@@ -170,7 +170,7 @@ function getRandomInt(min, max) {
       this.canvasHeight = height;
       this.columns = this.canvasWidth/this.fontSize;
       this.symbols = [];
-      this.#initialize();
+      this.initialize();
 
     }
   }
