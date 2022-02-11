@@ -65,8 +65,6 @@ Alternatively, you can pay using the button below</p>
 <img src="https://pro.nft-maker.io/images/buttons/paybutton_1_1.svg" onclick="javascript:openPaymentWindow()">
 </article>
 
-
-  
 <script type="text/javascript">
             function openPaymentWindow() {
                 const paymentUrl = "https://payment.nft-maker.io/?p=d2e48fc2edc344ed914021ceef9f8376&c=1";
@@ -81,6 +79,9 @@ Alternatively, you can pay using the button below</p>
 
                 const popup =  window.open(paymentUrl, "NFT-MAKER PRO Payment Gateway",  `popup=1, location=1, width=${popupWidth}, height=${popupHeight}, left=${left}, top=${top}`);
 
+                // Show dim background
+                document.body.style = "background: rgba(0, 0, 0, 0.5)";
+
                 // Continuously check whether the popup has been closed
                 const backgroundCheck = setInterval(function () {
                     if(popup.closed) {
@@ -88,10 +89,13 @@ Alternatively, you can pay using the button below</p>
 
                         console.log("Popup closed");
 
+                        // Remove dim background
+                        document.body.style = "";
                     }
                 }, 1000);
             }
-</script>
+        </script>
+
 
 
 <script>
