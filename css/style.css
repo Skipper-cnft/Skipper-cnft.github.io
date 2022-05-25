@@ -68,6 +68,8 @@ a {
 	background-color: transparent;
 	text-decoration: none;
 	color:  white;
+	padding-left: 16px;
+	padding-right: 16px;
 }
 
 .footer {
